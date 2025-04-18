@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Photo Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    figure {
+      border: 2px solid transparent;
+      padding: 10px;
+      width: 200px;
+      transition: border-color 0.3s;
+    }
+
+    figure:focus {
+      outline: none;
+      border-color: #007acc;
+      background-color: #f0f8ff;
+    }
+
+    figcaption {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Accessible Photo Gallery</h1>
+
+  <section class="gallery">
+    <figure>
+      <img src="beach-sunset.jpg" alt="Sunset on the beach">
+      <figcaption>Beach Sunset</figcaption>
+    </figure>
+    <figure>
+      <img src="sunrise-view.jpg" alt="Sunrise view">
+      <figcaption>Sunrise</figcaption>
+    </figure>
+    <figure>
+      <img src="camp-fire.jpg" alt="Campfire">
+      <figcaption>Campfire</figcaption>
+    </figure>
+    <!-- Add more figures if you'd like -->
+  </section>
+
+  <script>
+    // Run when the page is fully loaded
+    window.onload = function () {
+      console.log("Gallery loaded!");
+
+      const figures = document.querySelectorAll("figure");
+
+      figures.forEach((figure, index) => {
+        // Add tabindex for keyboard navigation
+        figure.setAttribute("tabindex", "0");
+
+        // Add mouseover and mouseout effects
+        figure.addEventListener("mouseover", () => {
+          figure.style.borderColor = "#007acc";
+        });
+
+        figure.addEventListener("mouseout", () => {
+          figure.style.borderColor = "transparent";
+        });
+
+        // Optional: Keyboard interaction (e.g., press Enter to highlight)
+        figure.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            figure.style.backgroundColor = "#d0f0ff";
+            setTimeout(() => {
+              figure.style.backgroundColor = "";
+            }, 300);
+          }
+        });
+      });
+    };
+  </script>
+
+</body>
+</html>
